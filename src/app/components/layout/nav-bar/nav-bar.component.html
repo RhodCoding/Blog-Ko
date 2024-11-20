@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <a routerLink="/" class="navbar-brand">Blog Ko</a>
+    
+    <div class="navbar-menu">
+      <ng-container *ngIf="!(isLoggedIn$ | async); else loggedInMenu">
+        <a routerLink="/login" class="nav-link">Login</a>
+        <a routerLink="/register" class="nav-link">Register</a>
+      </ng-container>
+      
+      <ng-template #loggedInMenu>
+        <a routerLink="/posts/new" class="nav-link">New Post</a>
+        <button (click)="logout()" class="nav-link">Logout</button>
+      </ng-template>
+    </div>
+  </div>
+</nav>

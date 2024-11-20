@@ -1,0 +1,35 @@
+<div class="post-list-container">
+  <div class="header">
+    <h1>Blog Posts</h1>
+    <a *ngIf="isLoggedIn" routerLink="/posts/new" class="btn btn-primary">Create New Post</a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading posts...
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="posts-grid">
+    <article *ngFor="let post of posts" class="post-card">
+      <div class="post-content">
+        <h2>{{ post.title }}</h2>
+        <p class="summary">{{ post.summary }}</p>
+        <div class="meta-info">
+          <span class="author">By {{ post.authorName }}</span>
+          <span class="date">{{ post.createdAt | date }}</span>
+        </div>
+        <div class="tags">
+          <span *ngFor="let tag of post.tags" class="tag">{{ tag }}</span>
+        </div>
+      </div>
+      <a [routerLink]="['/posts', post.id]" class="read-more">Read More</a>
+    </article>
+  </div>
+
+  <div *ngIf="!isLoading && !error && posts.length === 0" class="no-posts">
+    No blog posts available.
+  </div>
+</div>
